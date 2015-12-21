@@ -1,8 +1,11 @@
-=Network Wrapper=
+#Network Wrapper
+
 Is a multi system network wrapper.
 It just parse the output of the commands **Ping** and **Trace Route** and show the results.
-==Usage==
-=Licence=
+##Usage
+
+#Licence 
+
 The MIT License (MIT)
 
 Copyright (c) 2015 Alexander Soto
