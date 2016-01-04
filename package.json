@@ -1,0 +1,27 @@
+{
+  "name": "network-wrapper",
+  "version": "0.1.0",
+  "description": "Network wrapper for each operative system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexsotocx/network-wrapper.git"
+  },
+  "keywords": [
+    "Ping",
+    "Network",
+    "Test",
+    "Trace",
+    "Route",
+    "OS"
+  ],
+  "author": "Alexander Soto <asoto@innventto.com, nickforspeed25@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexsotocx/network-wrapper/issues"
+  },
+  "homepage": "https://github.com/alexsotocx/network-wrapper#readme"
+}
