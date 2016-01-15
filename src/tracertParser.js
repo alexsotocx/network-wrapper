@@ -1,5 +1,5 @@
 var net = require('net');
-
+var os = require('os');
 var getOsType = function() {
   var osType = os.type();
   var regexWin = /^(windows|Windows|WINDOWS|win)/;
