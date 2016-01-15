@@ -1,19 +1,14 @@
 var PingParser = require('./src/pingParser');
 var PingWrapper = require('./src/pingWrapper');
+var tracertParser = require('./src/tracertParser');
+var tracertWrapper = require('./src/tracertWrapper');
 
-var test = {
+var NetworkWrapper = {
 	PingParser: PingParser,
 	PingWrapper: PingWrapper,
-	NetworkTest: function(domainName) {
-		PingWrapper.execute(domainName)
-			.then(PingParser.parse.bind(PingParser))
-			.then(function(output) {
-				console.log("Results", output);
-			})
-			.catch(function(error) {
-				console.error(error);
-			})
-	}.bind(this)
+	tracertParser: tracertParser,
+	tracertWrapper: tracertWrapper
 }
 
-module.exports = test;
+
+module.exports = NetworkWrapper;

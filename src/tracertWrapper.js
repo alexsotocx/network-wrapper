@@ -8,15 +8,15 @@ var getOsType = function() {
 	else
 		return osType;
 };
-var Ping = {
+var isWin = (getOsType() == "Windows");
+var tracertWrapper = {
 	command: function(options) {
 		var osFunctions = {
-			Windows: "ping -n 1 -i :ttl -w :timeout :domainName",
-			Linux: "ping -c 1 -m :ttl -t :timeout :domainName",
-			Darwin: "ping -c 1 -m :ttl -t :timeout :domainName"
+			Windows: "tracert -d 1 -w :timeout :domainName",
+			Linux: "traceroute -q 1 -n -w :timeout :domainName",
+			Darwin: "traceroute -q 1 -n -w :timeout :domainName"
 		};
 		var osType = getOsType();
-		console.log(osType);
 		var osCommand = osFunctions[osType];
 		var simbols = osCommand.match(/\:([^ ]+)/g)
 		simbols.forEach(function(simbol) {
@@ -28,9 +28,12 @@ var Ping = {
 
 	execute: function(domainName, options) {
 		options = options || {}
+		var default_ttl = 2000;
+		if(!isWin)
+			default_ttl = 2;
 		options = {
-			ttl: (options.ttl || 20),
-			timeout: (options.timeout || 2000),
+			timeout: (options.timeout || 2),
+			timeoutTime: 2000 * 15,
 			domainName: domainName
 		}
 		var command = this.command(options);
@@ -43,11 +46,11 @@ var Ping = {
 				}
 			}.bind(this));
 			setTimeout(function() {
-				return reject(new Error("Operation Timeout"));
-			}, options.timeout * 5);
+				return reject(new Error("Too many timeouts"));
+			}, options.timeoutTime);
 		}.bind(this));
 	}
 
 };
 
-module.exports = Ping;
+module.exports = tracertWrapper;
