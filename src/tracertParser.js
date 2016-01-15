@@ -24,7 +24,7 @@ function parseHop(line) {
 }
 
 function parseHopWin(line) {
-  if (line[4] === 'Request')
+  if (line[4] === 'Request' || line[4] === "Tiempo")
     return false;
 
   var hop = {};
