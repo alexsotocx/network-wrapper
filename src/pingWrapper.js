@@ -31,7 +31,7 @@ var Ping = {
 			exec(command, function(err, stdout, stderr) {
 				setTimeout(function() {
 					return reject(new Error("Operation Timeout"));
-				}, options.timeout * 20);
+				}, options.timeout * 5);
 				if(err) {
 					return reject(err);
 				} else {
