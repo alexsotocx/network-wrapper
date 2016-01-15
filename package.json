@@ -2,7 +2,7 @@
   "name": "network-wrapper",
   "version": "0.1.0",
   "description": "Network wrapper for each operative system",
-  "main": "index.js",
+  "main": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
