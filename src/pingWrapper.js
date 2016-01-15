@@ -1,6 +1,13 @@
 var exec = require('child_process').exec;
 var os = require('os');
-
+var getOsType = function() {
+	var osType = os.type();
+	var regexWin = /^(windows|Windows|WINDOWS|win)/;
+	if(regexWin.test(osType))
+		return "Windows";
+	else
+		return osType;
+};
 var Ping = {
 	command: function(options) {
 		var osFunctions = {
@@ -8,9 +15,9 @@ var Ping = {
 			Linux: "ping -c 1 -m :ttl -t :timeout :domainName",
 			Darwin: "ping -c 1 -m :ttl -t :timeout :domainName"
 		};
-		var osType = os.type();
+		var osType = getOsType();
+		console.log(osType);
 		var osCommand = osFunctions[osType];
-		var isWindows = (osType == "Windows");
 		var simbols = osCommand.match(/\:([^ ]+)/g)
 		simbols.forEach(function(simbol) {
 			var dataSimbol = simbol.substring(1); //Removes the ':' of the simbol
