@@ -12,7 +12,7 @@ var isWin = (getOsType() == "Windows");
 var tracertWrapper = {
 	command: function(options) {
 		var osFunctions = {
-			Windows: "tracert -d 1 -w :timeout :domainName",
+			Windows: "tracert -d -w :timeout :domainName",
 			Linux: "traceroute -q 1 -n -w :timeout :domainName",
 			Darwin: "traceroute -q 1 -n -w :timeout :domainName"
 		};
@@ -32,7 +32,7 @@ var tracertWrapper = {
 		if(!isWin)
 			default_ttl = 2;
 		options = {
-			timeout: (options.timeout || 2),
+			timeout: default_ttl,
 			timeoutTime: 2000 * 15,
 			domainName: domainName
 		}
