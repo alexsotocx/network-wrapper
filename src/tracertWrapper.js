@@ -12,9 +12,9 @@ var isWin = (getOsType() == "Windows");
 var tracertWrapper = {
 	command: function(options) {
 		var osFunctions = {
-			Windows: "tracert -d -w :timeout :domainName",
-			Linux: "traceroute -q 1 -n -w :timeout :domainName",
-			Darwin: "traceroute -q 1 -n -w :timeout :domainName"
+			Windows: "tracert -d -h :max_hops :domainName",
+			Linux: "traceroute -m :max_hops -q 1 -n :domainName",
+			Darwin: "traceroute -m :max_hops  -q 1 -n :domainName"
 		};
 		var osType = getOsType();
 		var osCommand = osFunctions[osType];
@@ -28,14 +28,12 @@ var tracertWrapper = {
 
 	execute: function(domainName, options) {
 		options = options || {}
-		var default_ttl = 2000;
-		if(!isWin)
-			default_ttl = 2;
+
 		options = {
-			timeout: default_ttl,
-			timeoutTime: 2000 * 15,
+			max_hops: options.max_hops || 25,
 			domainName: domainName
 		}
+		
 		var command = this.command(options);
 		return new Promise(function(resolve, reject) {
 			exec(command, function(err, stdout, stderr) {
@@ -45,9 +43,6 @@ var tracertWrapper = {
 					return resolve(stdout);
 				}
 			}.bind(this));
-			setTimeout(function() {
-				return reject(new Error("Too many timeouts"));
-			}, options.timeoutTime);
 		}.bind(this));
 	}
 

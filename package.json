@@ -1,6 +1,6 @@
 {
   "name": "network-wrapper",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Network wrapper for each operative system",
   "main": "./index.js",
   "scripts": {

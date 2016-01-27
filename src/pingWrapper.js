@@ -11,9 +11,9 @@ var getOsType = function() {
 var Ping = {
 	command: function(options) {
 		var osFunctions = {
-			Windows: "ping -n 1 -i :ttl -w :timeout :domainName",
-			Linux: "ping -c 1 -m :ttl -t :timeout :domainName",
-			Darwin: "ping -c 1 -m :ttl -t :timeout :domainName"
+			Windows: "ping -n 1 -i :ttl :domainName",
+			Linux: "ping -c 1 -m :ttl :domainName",
+			Darwin: "ping -c 1 -m :ttl :domainName"
 		};
 		var osType = getOsType();
 		console.log(osType);
@@ -29,8 +29,7 @@ var Ping = {
 	execute: function(domainName, options) {
 		options = options || {}
 		options = {
-			ttl: (options.ttl || 20),
-			timeout: (options.timeout || 2000),
+			ttl: (options.ttl || 25),
 			domainName: domainName
 		}
 		var command = this.command(options);
@@ -42,9 +41,6 @@ var Ping = {
 					return resolve(stdout);
 				}
 			}.bind(this));
-			setTimeout(function() {
-				return reject(new Error("Operation Timeout"));
-			}, options.timeout * 5);
 		}.bind(this));
 	}
 
